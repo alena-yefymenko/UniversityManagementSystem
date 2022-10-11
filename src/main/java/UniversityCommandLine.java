@@ -1,8 +1,9 @@
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UniversityCommandLine {
+    static InterfaceCoursesDB coursesDB = new CoursesDB();
+
     public static void main(String[] args) {
         printCommands();
         readCommands();
@@ -37,7 +38,7 @@ public class UniversityCommandLine {
     private static void viewAllCourses() {
         ArrayList<Course> courses;
         try {
-            courses = UniversityDB.getCourses();
+            courses = coursesDB.getCourses();
             for (Course c : courses) {
                 System.out.println(c);
             }
@@ -53,7 +54,7 @@ public class UniversityCommandLine {
         System.out.println("Enter duration (hours): ");
         int duration = scanner.nextInt();
         try {
-            UniversityDB.addCourse(title, duration);
+            coursesDB.addCourse(title, duration);
             System.out.println("New course has been added successfully!");
         } catch (Exception e) {
             System.out.println(e);
@@ -66,7 +67,7 @@ public class UniversityCommandLine {
         String title = scanner.nextLine();
         Course course;
         try {
-          course =  UniversityDB.getCourseByTitle(title);
+          course =  coursesDB.getCourseByTitle(title);
           System.out.println(course);
         } catch (Exception e) {
             System.out.println(e);

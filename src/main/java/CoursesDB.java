@@ -1,8 +1,7 @@
-import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UniversityDB {
+public class CoursesDB implements InterfaceCoursesDB {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
     /*ArrayList<Course> c = getCourses();
     for(Course course: c){
@@ -12,7 +11,8 @@ public class UniversityDB {
 
     }
 
-    public static ArrayList<Course> getCourses() throws SQLException, ClassNotFoundException {
+    @Override
+    public ArrayList<Course> getCourses() throws SQLException, ClassNotFoundException {
         Connection con = getConnection();
         String sql = "select * from courses";
         Statement stmt = con.createStatement();
@@ -30,7 +30,8 @@ public class UniversityDB {
         return courses;
     }
 
-    public static Course getCourseByTitle(String title) throws SQLException, ClassNotFoundException {
+    @Override
+    public Course getCourseByTitle(String title) throws SQLException, ClassNotFoundException {
         Connection con = getConnection();
         String sql = "select * from courses where title = ? ";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -47,20 +48,23 @@ public class UniversityDB {
         return course;
     }
 
-    public static void addCourse(String title, int duration ) throws SQLException, ClassNotFoundException{
+    @Override
+    public void addCourse(String title, int duration) throws SQLException, ClassNotFoundException {
         Connection con = getConnection();
         String sql = "INSERT INTO courses (Title, Duration) values (?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(1,title);
-        stmt.setInt(2,duration);
+        stmt.setString(1, title);
+        stmt.setInt(2, duration);
         stmt.executeUpdate();
         con.close();
     }
 
+
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        //Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/university", "root", "root");
         return con;
     }
+
 
 }
