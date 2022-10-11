@@ -28,10 +28,12 @@ public class UniversityCommandLine {
     public static void readCommands() {
         Scanner scanner = new Scanner(System.in);
         int i = scanner.nextInt();
-        switch (i) {
-            case 7 -> addCourse();
-            case 8 -> viewAllCourses();
-            case 9 -> viewSingleCourseInfo();
+        if (i == 7) {
+            addCourse();
+        } else if (i == 8) {
+            viewAllCourses();
+        } else if (i == 9) {
+            viewSingleCourseInfo();
         }
     }
 
@@ -73,6 +75,8 @@ public class UniversityCommandLine {
             System.out.println(e);
         }
     }
+
+
 }
 
 
