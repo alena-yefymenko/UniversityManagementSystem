@@ -20,13 +20,13 @@ public class UniversityCommandLine {
         System.out.println("4. Enroll student in to the course");
         // System.out.println("5. View student Exams");
         // System.out.println("6. Delete student");
-        System.out.println("7. Add Course");
-        System.out.println("8. View All Courses");
-        System.out.println("9. View Single Course info");
-        System.out.println("10. Find Exam by Course name");
-        System.out.println("11. Create Exam ");
-        System.out.println("12. View Exam List");
-        System.out.println("13. View Exam Result");
+        System.out.println("5. Add Course");
+        System.out.println("6. View All Courses");
+        System.out.println("7. View Single Course info");
+        System.out.println("8. Find Exam by Course name");
+        System.out.println("9. Create Exam ");
+        System.out.println("10. View Exam List");
+        System.out.println("11. View Exam Result");
         System.out.println(" ---------------------- ");
         System.out.println("Choose the number for activity You would like to perform: ");
     }
@@ -42,20 +42,20 @@ public class UniversityCommandLine {
             viewStudentInfo(connection);
         } else if (i == 4) {
             setCourseToStudent(connection);
-        } else if (i == 7) {
+        } else if (i == 5) {
             addCourse();
-        } else if (i == 8) {
+        } else if (i == 6) {
             viewAllCourses();
-        } else if (i == 9) {
+        } else if (i == 7) {
             viewSingleCourseInfo();
-        } else if (i == 10) {
+        } else if (i == 8) {
             findExamByCourse(connection);
-        } else if (i == 11) {
+        } else if (i == 9) {
             createExamList(connection);
-        } else if (i == 12) {
+        } else if (i == 10) {
             ExamDB examDB = new ExamDB();
             examDB.viewExamList(connection);
-        } else if (i == 13) {
+        } else if (i == 11) {
             viewExamResult(connection);
         }
 
@@ -64,6 +64,7 @@ public class UniversityCommandLine {
     public static void addStudent(Connection connection) {
         Students newStudents = new Students();
         University.addStudent(connection, newStudents);
+        System.out.println("New student has been successfully added!");
 
     }
 
@@ -81,7 +82,7 @@ public class UniversityCommandLine {
         System.out.println("Enter course ID");
         int courseID = scanner.nextInt();
         University.setCourseToStudent(connection, id, courseID);
-        System.out.println("The student was successfully enrolled in a new course!");
+        System.out.println("The student was successfully enrolled in a course!");
     }
 
     private static void viewAllCourses() {
@@ -155,10 +156,13 @@ public class UniversityCommandLine {
         int examId = scanner.nextInt();
         System.out.println("Enter Exam Date:");
         int examDate = scanner.nextInt();
+        // https://www.geeksforgeeks.org/why-is-scanner-skipping-nextline-after-use-of-other-next-functions/
+        scanner.nextLine();
         System.out.println("Enter Exam Name:");
-        String examName = scanner.next();
+        String examName = scanner.nextLine();
         ExamDB examDB = new ExamDB();
         examDB.createExam(connection, examId, examDate, examName);
+        System.out.println("The new exam has been successfully created!");
     }
 
     public static void viewExamResult(Connection connection) {

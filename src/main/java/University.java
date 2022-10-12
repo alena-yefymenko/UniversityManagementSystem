@@ -31,9 +31,11 @@ public class University {
             ResultSet resultSet = statement.executeQuery(geAllStudentsQuery);
 
             while (resultSet.next()) {
-                System.out.print("Student's id: " + resultSet.getString(1));
-                System.out.print(" Name and surname: " + resultSet.getString(2) + resultSet.getString(3));
-                System.out.println(" Date of birth: " + resultSet.getString(4));
+                System.out.println("Student's id: " + resultSet.getString(1));
+                System.out.println("Name: " + resultSet.getString(2));
+                System.out.println("Surname: " + resultSet.getString(3));
+                System.out.println("Date of birth: " + resultSet.getString(4));
+                System.out.println("Course id: " + resultSet.getInt(5));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,8 +86,8 @@ public class University {
 
             while (resultSet.next()) {
                 System.out.println("Student's id: " + resultSet.getString(1));
-                System.out.println("Name and surname: " + resultSet.getString(2));
-                System.out.println("Email: " + resultSet.getString(3));
+                System.out.println("Name: " + resultSet.getString(2));
+                System.out.println("Surname: " + resultSet.getString(3));
                 System.out.println("Date of birth: " + resultSet.getString(4));
                 System.out.println("Course id: " + resultSet.getInt(5));
             }

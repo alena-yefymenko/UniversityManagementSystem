@@ -7,7 +7,7 @@ public class ExamDB implements ExamInterface {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/university", "root", "root");
             ExamDB examDB = new ExamDB();
             //viewExamList(connection);
-            examDB.viewExamResult(connection, 101);
+            //examDB.viewExamResult(connection, 101);
             //findExamByCourse(connection, "Algorithms");
 
         } catch (Exception e) {
