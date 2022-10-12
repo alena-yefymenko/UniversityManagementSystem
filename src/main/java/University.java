@@ -32,8 +32,8 @@ public class University {
 
             while (resultSet.next()) {
                 System.out.print("Student's id: " + resultSet.getString(1));
-                System.out.print(" Name and surname: " + resultSet.getString(2));
-                System.out.println(" Date of birth: " + resultSet.getString(3));
+                System.out.print(" Name and surname: " + resultSet.getString(2) + resultSet.getString(3));
+                System.out.println(" Date of birth: " + resultSet.getString(4));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,22 +43,27 @@ public class University {
     public static void addStudent(Connection connection, Students students) {
         Scanner k = new Scanner(System.in);
 
-        System.out.println("Please enter student's full name: ");
-        String studentName = k.nextLine();
+        System.out.println("Please enter student's name: ");
+        String studentName = k.next();
 
-        System.out.println("Enter student's date of birth by pattern yyyymmdd");
-        int studentDateOfBirth = k.nextInt();
+        System.out.println("Please enter student's surname: ");
+        String studentSurname = k.next();
+
+        System.out.println("enter student's date of birth by pattern yyyymmdd: ");
+        //noinspection RedundantExplicitVariableType
+        int dateOfBirth = k.nextInt();
 
         k.close();
 
 
-        String addStudentQuery = "INSERT INTO University.Students(full_name, date_of_birth ) VALUES (?,?);";
+        String addStudentQuery = "INSERT INTO University.Students(name, surname, date_of_birth) VALUES (?,?,?);";
 
-        try {
+        try (connection) {
 
             PreparedStatement pStatement = connection.prepareStatement(addStudentQuery);
-            pStatement.setString(1, students.setFullName(studentName));
-            pStatement.setInt(2, students.setDateOfBirth(studentDateOfBirth));
+            pStatement.setString(1, students.setName(studentName));
+            pStatement.setString(2, students.setSurname(studentSurname));
+            pStatement.setInt(3, students.setDateOfBirth(dateOfBirth));
 
 
             pStatement.executeUpdate();
@@ -67,6 +72,7 @@ public class University {
             e.printStackTrace();
         }
     }
+
 
     public static void viewStudentInfo(Connection connection, int id) {
 
@@ -88,13 +94,13 @@ public class University {
         }
     }
 
-    public static void setCourseToStudent(Connection connection, int id, int course_id) {
-        String updateStudentQuery = "UPDATE University.Students SET course_id = ? WHERE id = ?";
+    public static void setCourseToStudent(Connection connection, int id, int courseID) {
+        String updateStudentQuery = "UPDATE University.Students SET courseID = ? WHERE id = ?";
 
         try {
             PreparedStatement pStatement = connection.prepareStatement(updateStudentQuery);
 
-            pStatement.setInt(1, course_id);
+            pStatement.setInt(1, courseID);
             pStatement.setInt(2, id);
 
             pStatement.executeUpdate();

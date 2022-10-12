@@ -3,20 +3,24 @@ import java.lang.String;
 public class Students implements IStudents {
 
     private int courseId;
-    private String fullName;
+    private String Name;
+    private String surname;
     private int dateOfBirth;
-    private String email;
+
 
     public Students() {
 
     }
 
 
-    public String setFullName(String fullName) {
-        this.fullName = fullName;
-        return fullName;
+    public String setName(String Name) {
+        this.Name = Name;
+        return Name;
     }
-
+     public String setSurname(String surname){
+        this.surname = surname;
+        return surname;
+     }
 
     public int setDateOfBirth(int dateOfBirth) {
         this.dateOfBirth = dateOfBirth;

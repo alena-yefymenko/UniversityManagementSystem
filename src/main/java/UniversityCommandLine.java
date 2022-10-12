@@ -13,6 +13,7 @@ public class UniversityCommandLine {
 
     public static void printCommands() {
         System.out.println("Welcome to the University!");
+        System.out.println(" ---------------------- ");
         System.out.println("1. Add Student");
         System.out.println("2. Vew All students");
         System.out.println("3. Vew Single Student info");
@@ -23,6 +24,9 @@ public class UniversityCommandLine {
         System.out.println("8. View All Courses");
         System.out.println("9. View Single Course info");
         System.out.println("10. Find Exam by Course name");
+        System.out.println("11. Create Exam ");
+        System.out.println("12. View Exam List");
+        System.out.println("13. View Exam Result");
         System.out.println(" ---------------------- ");
         System.out.println("Choose the number for activity You would like to perform: ");
     }
@@ -32,7 +36,7 @@ public class UniversityCommandLine {
         int i = scanner.nextInt();
         if (i == 1) {
             addStudent(connection);
-        } else if (i == 2 ) {
+        } else if (i == 2) {
             University.viewStudents(connection);
         } else if (i == 3) {
             viewStudentInfo(connection);
@@ -46,6 +50,13 @@ public class UniversityCommandLine {
             viewSingleCourseInfo();
         } else if (i == 10) {
             findExamByCourse(connection);
+        } else if (i == 11) {
+            createExamList(connection);
+        } else if (i == 12) {
+            ExamDB examDB = new ExamDB();
+            examDB.viewExamList(connection);
+        } else if (i == 13) {
+            viewExamResult(connection);
         }
 
     }
@@ -55,6 +66,7 @@ public class UniversityCommandLine {
         University.addStudent(connection, newStudents);
 
     }
+
     public static void viewStudentInfo(Connection connection) {
         System.out.println("Enter student ID:");
         Scanner scanner = new Scanner(System.in);
@@ -135,6 +147,27 @@ public class UniversityCommandLine {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void createExamList(Connection connection) {
+        System.out.println("Enter Exam ID:");
+        Scanner scanner = new Scanner(System.in);
+        int examId = scanner.nextInt();
+        System.out.println("Enter Exam Date:");
+        int examDate = scanner.nextInt();
+        System.out.println("Enter Exam Name:");
+        String examName = scanner.next();
+        ExamDB examDB = new ExamDB();
+        examDB.createExam(connection, examId, examDate, examName);
+    }
+
+    public static void viewExamResult(Connection connection) {
+        System.out.println("Enter Exam ID:");
+        Scanner scanner = new Scanner(System.in);
+        int inputID = scanner.nextInt();
+        ExamDB examDB = new ExamDB();
+        examDB.viewExamResult(connection,inputID );
+
     }
 }
 
